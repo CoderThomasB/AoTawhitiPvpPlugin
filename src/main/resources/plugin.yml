@@ -1,0 +1,5 @@
+name: AoTawhitiPvpPlugin
+version: 1.0-SNAPSHOT
+author: CoderThomasB
+main: CoderThomasB.AoTawhitiPvpPlugin.AoTawhitiPvpPlugin
+api-version: 1.16.5-R0.1-SNAPSHOT
