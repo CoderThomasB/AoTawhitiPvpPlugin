@@ -48,6 +48,7 @@ public class FreeForAll extends AdvancedGame {
     @Override
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
+        StopPlayer(event.getPlayer());
         for (Player ThePlayer : Owner.getServer().getOnlinePlayers()) {
             ThePlayer.sendTitle(" ", "§6§l%s §aleft :(".formatted(event.getPlayer().getDisplayName()), 0, 100, 20);
         }
