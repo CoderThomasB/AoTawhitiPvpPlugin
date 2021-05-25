@@ -34,11 +34,11 @@ public class AoTawhitiPvpPlugin extends JavaPlugin implements Runnable {
 					return;
 				} catch (Exception ignored) {
 				}
+			} else {
+				
+				NowGame = new _1V1Game(this);
+				NowGame.Start();
 			}
-			
-			NowGame = new _1V1Game(this);
-			NowGame.Start();
-			return;
 			
 		} catch (Exception e) {
 			for (Player ThePlayer : getServer().getOnlinePlayers()) {
