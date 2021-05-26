@@ -1,0 +1,13 @@
+name: AoTawhitiPvpPlugin
+version: 24-May-2021
+author: CoderThomasB
+main: CoderThomasB.AoTawhitiPvpPlugin.AoTawhitiPvpPlugin
+commands:
+  stopgame:
+    description: Stops the curinty runing game
+    usage: /<command>
+#    permission: AoTawhitiPvpPlugin.admin.stopgame
+  startgame:
+    description: Starts a new game
+    usage: /<command>
+#    permission: AoTawhitiPvpPlugin.admin.startgame
