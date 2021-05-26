@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Random;
 
 public class AoTawhitiPvpPlugin extends JavaPlugin implements Runnable {
-	public HashMap<Player, Instant> LastPlayed = new HashMap<>();
+	public final HashMap<Player, Instant> LastPlayed = new HashMap<>();
 	public Game NowGame;
 	public GameCommandExecutor MyExecutor;
 	

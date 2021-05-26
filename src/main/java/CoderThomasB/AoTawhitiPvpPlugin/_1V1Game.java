@@ -3,7 +3,6 @@ package CoderThomasB.AoTawhitiPvpPlugin;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,6 +10,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.time.Instant;
+import java.util.Objects;
 
 public class _1V1Game extends AdvancedGame implements Listener {
     public Player FirstPlayer;
@@ -34,8 +34,8 @@ public class _1V1Game extends AdvancedGame implements Listener {
         SecondPlayer = GetNextPlayer();
         Owner.LastPlayed.put(SecondPlayer, Instant.now());
 
-        FirstPlayer.setHealth(FirstPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-        SecondPlayer.setHealth(SecondPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+        FirstPlayer.setHealth(Objects.requireNonNull(Objects.requireNonNull(FirstPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH))).getValue());
+        SecondPlayer.setHealth(Objects.requireNonNull(SecondPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
 
         FirstPlayer.setFoodLevel(20);
         FirstPlayer.setSaturation(5);
@@ -63,17 +63,19 @@ public class _1V1Game extends AdvancedGame implements Listener {
         }
     }
 
+    @Override
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         if(event.getPlayer() == FirstPlayer || event.getPlayer() == SecondPlayer) {
             StopWithoutMessage();
 
             for (Player ThePlayer : Owner.getServer().getOnlinePlayers()) {
-                ThePlayer.sendTitle(" ", "§6§l%s §aleft :(".formatted(event.getPlayer().getDisplayName()), 0, 100, 20);
+                ThePlayer.sendTitle(" ", "§6§l%s§a left :(".formatted(event.getPlayer().getDisplayName()), 0, 100, 20);
             }
         }
     }
 
+    @Override
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         if(event.getEntity() == FirstPlayer) {

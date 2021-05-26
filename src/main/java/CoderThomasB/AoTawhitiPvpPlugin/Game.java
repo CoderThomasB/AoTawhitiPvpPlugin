@@ -6,7 +6,7 @@ import java.time.Instant;
 
 public abstract class Game {
     public boolean isPlaying = false;
-    public AoTawhitiPvpPlugin Owner;
+    public final AoTawhitiPvpPlugin Owner;
 
     public Game(AoTawhitiPvpPlugin Plugin){
         Owner = Plugin;

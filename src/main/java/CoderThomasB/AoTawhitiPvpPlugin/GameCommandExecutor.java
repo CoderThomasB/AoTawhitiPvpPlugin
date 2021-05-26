@@ -5,7 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 public class GameCommandExecutor implements CommandExecutor {
-    public AoTawhitiPvpPlugin Owner;
+    public final AoTawhitiPvpPlugin Owner;
 
     public GameCommandExecutor(AoTawhitiPvpPlugin plugin){
         Owner = plugin;
@@ -15,15 +15,20 @@ public class GameCommandExecutor implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
        try {
            switch (command.getName()) {
-               case "startgame":
+               //noinspection SpellCheckingInspection
+               case "startgame" -> {
                    Owner.NowGame.Start();
                    return true;
-               case "stopgame":
+               }
+               //noinspection SpellCheckingInspection
+               case "stopgame" -> {
                    Owner.NowGame.Stop();
                    return true;
-               default:
+               }
+               default -> {
                    sender.sendMessage("Unknown command name" + command.getName());
                    return false;
+               }
            }
        }catch (Exception E){
            sender.sendMessage("Error when executing command: " + E);
