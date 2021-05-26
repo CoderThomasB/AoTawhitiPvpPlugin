@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.time.Instant;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
 
 public class AoTawhitiPvpPlugin extends JavaPlugin implements Runnable {
@@ -15,8 +16,8 @@ public class AoTawhitiPvpPlugin extends JavaPlugin implements Runnable {
 	@Override
 	public void onEnable() {
 		MyExecutor = new GameCommandExecutor(this);
-		this.getCommand("startgame").setExecutor(MyExecutor);
-		this.getCommand("stopgame").setExecutor(MyExecutor);
+		Objects.requireNonNull(this.getCommand("startgame")).setExecutor(MyExecutor);
+		Objects.requireNonNull(this.getCommand("stopgame")).setExecutor(MyExecutor);
 		
 		// Stops null pointer
 		NowGame = new _1V1Game(this);
@@ -27,24 +28,22 @@ public class AoTawhitiPvpPlugin extends JavaPlugin implements Runnable {
 	public void StartNewGame() {
 		if (NowGame.isPlaying) return;
 		try {
-			if (new Random().nextFloat() > 1 / 4) {
+			if (new Random().nextFloat() > 1f / 4f) {
 				try {
 					NowGame = new FreeForAll(this);
 					NowGame.Start();
 					return;
 				} catch (Exception ignored) {
 				}
-			} else {
-				
-				NowGame = new _1V1Game(this);
-				NowGame.Start();
 			}
+			
+			NowGame = new _1V1Game(this);
+			NowGame.Start();
 			
 		} catch (Exception e) {
 			for (Player ThePlayer : getServer().getOnlinePlayers()) {
 				ThePlayer.sendMessage(e.getMessage());
 			}
-			return;
 		}
 	}
 	
