@@ -15,10 +15,12 @@ public class GameCommandExecutor implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
        try {
            switch (command.getName()) {
+               //noinspection SpellCheckingInspection
                case "startgame" -> {
                    Owner.NowGame.StartNow();
                    return true;
                }
+               //noinspection SpellCheckingInspection
                case "stopgame" -> {
                    Owner.NowGame.Stop();
                    return true;

@@ -82,17 +82,19 @@ public class _1V1Game extends AdvancedGame implements Listener {
         SecondPlayer.teleport(new Location(FirstPlayer.getWorld(), 0, 10, 0));
     }
 
+    @Override
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         if (event.getPlayer() == FirstPlayer || event.getPlayer() == SecondPlayer) {
             StopWithoutMessage();
 
             for (Player ThePlayer : Owner.getServer().getOnlinePlayers()) {
-                ThePlayer.sendTitle(" ", "§6§l%s §aleft :(".formatted(event.getPlayer().getDisplayName()), 0, 100, 20);
+                ThePlayer.sendTitle(" ", "§6§l%s§a left :(".formatted(event.getPlayer().getDisplayName()), 0, 100, 20);
             }
         }
     }
 
+    @Override
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         if (event.getEntity() == FirstPlayer) {

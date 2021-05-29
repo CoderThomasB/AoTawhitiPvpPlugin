@@ -1,20 +1,18 @@
 package CoderThomasB.AoTawhitiPvpPlugin;
 
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.time.Instant;
 import java.util.LinkedList;
 import java.util.Objects;
 
 @Deprecated
 public class FreeForAll extends AdvancedGame {
-    public LinkedList<Player> PlayersInGame = new LinkedList<>();
+    public final LinkedList<Player> PlayersInGame = new LinkedList<>();
 
     public FreeForAll(AoTawhitiPvpPlugin Plugin) {
         super(Plugin);
@@ -51,8 +49,9 @@ public class FreeForAll extends AdvancedGame {
     @Override
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
+        StopPlayer(event.getPlayer());
         for (Player ThePlayer : Owner.getServer().getOnlinePlayers()) {
-            ThePlayer.sendTitle(" ", "§6§l%s §aleft :(".formatted(event.getPlayer().getDisplayName()), 0, 100, 20);
+            ThePlayer.sendTitle(" ", "§6§l%s§a left :(".formatted(event.getPlayer().getDisplayName()), 0, 100, 20);
         }
     }
 
