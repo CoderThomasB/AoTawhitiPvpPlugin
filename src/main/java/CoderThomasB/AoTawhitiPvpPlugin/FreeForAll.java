@@ -10,7 +10,9 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.time.Instant;
 import java.util.LinkedList;
+import java.util.Objects;
 
+@Deprecated
 public class FreeForAll extends AdvancedGame {
     public LinkedList<Player> PlayersInGame = new LinkedList<>();
 
@@ -18,15 +20,16 @@ public class FreeForAll extends AdvancedGame {
         super(Plugin);
     }
 
-    public void Start() {
-        super.Start();
+    @Override
+    public void StartNow() {
+        super.StartNow();
 
         if (Owner.getServer().getOnlinePlayers().size() < 3) {
             throw new RuntimeException("There are not enough players to start a new game");
         }
 
         for (Player ThePlayer : Owner.getServer().getOnlinePlayers()) {
-            ThePlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+            Objects.requireNonNull(ThePlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue();
             ThePlayer.setFoodLevel(20);
             ThePlayer.setSaturation(5);
             ThePlayer.setGameMode(GameMode.ADVENTURE);

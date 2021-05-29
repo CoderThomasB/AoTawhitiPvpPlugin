@@ -15,15 +15,18 @@ public class GameCommandExecutor implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
        try {
            switch (command.getName()) {
-               case "startgame":
-                   Owner.NowGame.Start();
+               case "startgame" -> {
+                   Owner.NowGame.StartNow();
                    return true;
-               case "stopgame":
+               }
+               case "stopgame" -> {
                    Owner.NowGame.Stop();
                    return true;
-               default:
+               }
+               default -> {
                    sender.sendMessage("Unknown command name" + command.getName());
                    return false;
+               }
            }
        }catch (Exception E){
            sender.sendMessage("Error when executing command: " + E);

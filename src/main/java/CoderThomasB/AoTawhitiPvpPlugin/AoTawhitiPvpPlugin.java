@@ -8,6 +8,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class AoTawhitiPvpPlugin extends JavaPlugin implements Runnable {
     public HashMap<Player, Instant> LastPlayed = new HashMap<>();
@@ -17,8 +18,8 @@ public class AoTawhitiPvpPlugin extends JavaPlugin implements Runnable {
     @Override
     public void onEnable() {
         MyExecutor = new GameCommandExecutor(this);
-        this.getCommand("startgame").setExecutor(MyExecutor);
-        this.getCommand("stopgame").setExecutor(MyExecutor);
+        Objects.requireNonNull(this.getCommand("startgame")).setExecutor(MyExecutor);
+        Objects.requireNonNull(this.getCommand("stopgame")).setExecutor(MyExecutor);
 
         NowGame = new _1V1Game(this);
         ScheduleNextRun();
@@ -28,12 +29,11 @@ public class AoTawhitiPvpPlugin extends JavaPlugin implements Runnable {
 
     public void StartNewGame(){
         if(NowGame.isPlaying) return;
+        if(NowGame.isCountdown) return;
         try {
-            NowGame.Start();
+            NowGame.StartCountdown();
         } catch (Exception e){
-            for (Player ThePlayer : getServer().getOnlinePlayers()) {
-                ThePlayer.sendMessage(e.getMessage());
-            }
+            getServer().broadcastMessage(e.getMessage());
         }
     }
 
