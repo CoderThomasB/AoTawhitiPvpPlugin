@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'CoderThomasB'
-version '24-May-2021'
+version '31-May-2021'
 
 repositories {
     mavenCentral()
