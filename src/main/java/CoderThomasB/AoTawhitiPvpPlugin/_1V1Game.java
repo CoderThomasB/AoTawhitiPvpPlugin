@@ -1,15 +1,14 @@
 package CoderThomasB.AoTawhitiPvpPlugin;
 
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
+import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -31,6 +30,24 @@ public class _1V1Game extends AdvancedGame implements Listener {
         super.StartCountdown();
     }
 
+    public static void SetupInventory(PlayerInventory TheInventory) {
+        TheInventory.clear();
+        TheInventory.setHelmet(new ItemStack(Material.NETHERITE_HELMET));
+        TheInventory.setChestplate(new ItemStack(Material.NETHERITE_CHESTPLATE));
+        TheInventory.setLeggings(new ItemStack(Material.NETHERITE_LEGGINGS));
+        TheInventory.setBoots(new ItemStack(Material.NETHERITE_BOOTS));
+
+        TheInventory.setItemInOffHand(new ItemStack(Material.SHIELD));
+        TheInventory.setHeldItemSlot(0);
+        TheInventory.setItem(0, new ItemStack(Material.COOKED_BEEF));
+        Objects.requireNonNull(TheInventory.getItem(0)).setAmount(64);
+        TheInventory.setItem(1, new ItemStack(Material.NETHERITE_SWORD));
+        TheInventory.setItem(2, new ItemStack(Material.NETHERITE_AXE));
+        TheInventory.setItem(3, new ItemStack(Material.BOW));
+        TheInventory.setItem(4, new ItemStack(Material.ARROW));
+        Objects.requireNonNull(TheInventory.getItem(4)).setAmount(64);
+    }
+
     @Override
     public void StartNow() {
         super.StartNow();
@@ -48,13 +65,16 @@ public class _1V1Game extends AdvancedGame implements Listener {
         FirstPlayer.setHealth(Objects.requireNonNull(FirstPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
         SecondPlayer.setHealth(Objects.requireNonNull(SecondPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
 
+        FirstPlayer.teleport(new Location(FirstPlayer.getWorld(), 0, 4, 0, -45, 0));
+        SecondPlayer.teleport(new Location(FirstPlayer.getWorld(), 20, 4, 20, 135, 0));
+
         FirstPlayer.setFoodLevel(20);
         FirstPlayer.setSaturation(5);
         SecondPlayer.setFoodLevel(20);
         SecondPlayer.setSaturation(5);
 
-        FirstPlayer.teleport(new Location(FirstPlayer.getWorld(), 0, 4, 0, -45, 0));
-        SecondPlayer.teleport(new Location(FirstPlayer.getWorld(), 20, 4, 20, 135, 0));
+        SetupInventory(FirstPlayer.getInventory());
+        SetupInventory(SecondPlayer.getInventory());
 
         FirstPlayer.setGameMode(GameMode.ADVENTURE);
         SecondPlayer.setGameMode(GameMode.ADVENTURE);
@@ -72,6 +92,7 @@ public class _1V1Game extends AdvancedGame implements Listener {
 
         for (Player ThePlayer : Owner.getServer().getOnlinePlayers()) {
             ThePlayer.setGameMode(GameMode.SPECTATOR);
+            ThePlayer.getInventory().clear();
             Owner.getServer().getScheduler().scheduleSyncDelayedTask(Owner, () -> {
                 ThePlayer.playSound(ThePlayer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.AMBIENT, 1, 1);
                 ThePlayer.playSound(ThePlayer.getLocation(), "random.levelup", SoundCategory.AMBIENT, 1, 1);
