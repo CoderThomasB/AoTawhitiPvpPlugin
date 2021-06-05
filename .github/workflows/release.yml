@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Release jar file
 
 # Controls when the action will run. 
 on:
@@ -31,6 +31,9 @@ jobs:
      - name: Build with Gradle
        run: ./gradlew jar
      - name: Github Release
-       uses: elgohr/Github-Release-Action@v3.1
+       uses: softprops/action-gh-release@v0.1.5
        with:
-         release: Test
+         files: build/libs/AoTawhitiPvpPlugin-*.jar
+         name: ${{ $(date "+%d-%m-%Y-%H:%M:%S") }}
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
