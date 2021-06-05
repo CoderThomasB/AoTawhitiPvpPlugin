@@ -35,5 +35,6 @@ jobs:
        with:
          files: build/libs/AoTawhitiPvpPlugin-*.jar
          name: $(date "+%d-%m-%Y-%H:%M:%S")
+         tag: $(date "+%d-%m-%Y-%H:%M:%S")
        env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
