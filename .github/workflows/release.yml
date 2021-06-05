@@ -31,10 +31,9 @@ jobs:
      - name: Build with Gradle
        run: ./gradlew jar
      - name: Github Release
-       uses: softprops/action-gh-release@v0.1.5
+       uses: ncipollo/release-action@v1.8.6
        with:
-         files: build/libs/AoTawhitiPvpPlugin-*.jar
+         artifacts: build/libs/AoTawhitiPvpPlugin-*.jar
          name: $(date "+%d-%m-%Y-%H:%M:%S")
+         token: ${{ secrets.GITHUB_TOKEN }}
          tag: $(date "+%d-%m-%Y-%H:%M:%S")
-       env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
