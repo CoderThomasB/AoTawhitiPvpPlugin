@@ -33,7 +33,7 @@ jobs:
      - name: Github Release
        uses: ncipollo/release-action@v1.8.6
        with:
-         artifacts: build/libs/AoTawhitiPvpPlugin-*.jar
+         artifacts: "build/libs/AoTawhitiPvpPlugin-*.jar"
          name: $(date "+%d-%m-%Y-%H:%M:%S")
          token: ${{ secrets.GITHUB_TOKEN }}
-         tag: $(date "+%d-%m-%Y-%H:%M:%S")
+         tag: $(date "+%d-%m-%Y-%H-%M-%S")
